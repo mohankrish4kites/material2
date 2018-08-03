@@ -106,7 +106,7 @@ export function getMatAutocompleteMissingPanelError(): Error {
   selector: `input[matAutocomplete], textarea[matAutocomplete]`,
   host: {
     'role': 'combobox',
-    'autocomplete': 'off',
+    '[attr.autocomplete]': 'autocompleteAttribute',
     'aria-autocomplete': 'list',
     '[attr.aria-activedescendant]': 'activeOption?.id',
     '[attr.aria-expanded]': 'panelOpen.toString()',
@@ -149,6 +149,12 @@ export class MatAutocompleteTrigger implements ControlValueAccessor, OnDestroy {
 
   /** The autocomplete panel to be attached to this trigger. */
   @Input('matAutocomplete') autocomplete: MatAutocomplete;
+  
+  /**
+   * `autocomplete` attribute to be set on the input element.
+   * @docs-private
+   */
+  @Input('autocomplete') autocompleteAttribute: string = 'off';
 
   constructor(private _element: ElementRef, private _overlay: Overlay,
               private _viewContainerRef: ViewContainerRef,
